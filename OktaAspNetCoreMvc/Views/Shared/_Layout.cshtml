@@ -38,6 +38,7 @@
                 {
                     <ul class="nav navbar-nav navbar-right">
                         <li><p class="navbar-text">Hello, @User.Identity.Name!</p></li>
+                        <li><a asp-controller="Account" asp-action="Claims">My claims</a></li>
                         <li><a asp-controller="Account" asp-action="Logout">Log out</a></li>
                     </ul>
                 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OktaAspNetCoreMvc.Controllers
@@ -24,6 +25,12 @@ namespace OktaAspNetCoreMvc.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        public IActionResult Claims()
+        {
+            return View();
         }
     }
 }
