@@ -4,7 +4,7 @@ This example shows how to use Okta, OpenID Connect, and ASP.NET Core 2.0 MVC.
 
 You can follow the **[quickstart](https://developer.okta.com/quickstart/#/okta-sign-in-page/dotnet/aspnetcore)** for this project to see how it was created.
 
-**Prerequisites:** [.NET Core 2.0](https://dot.net/core) or higher
+**Prerequisites:** [.NET Core 2.0](https://dot.net/core) or higher.
 
 > [Okta](https://developer.okta.com/) has Authentication and User Management APIs that reduce development time with instant-on, scalable user infrastructure. Okta's intuitive API and expert support make it easy for developers to authenticate, manage and secure users and roles in any application.
 
@@ -50,7 +50,7 @@ Add a **Logout redirect URI**:
 http://localhost:60611/signout-callback-oidc
 ```
 
-Scroll to the bottom of the Okta application page and find the client ID and client secret. You'll need those values in the next step.
+Scroll to the bottom of the Okta application page to find the client ID and client secret. You'll need those values in the next step.
 
 ### Project configuration
 
