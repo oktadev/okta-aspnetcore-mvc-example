@@ -56,10 +56,8 @@ Scroll to the bottom of the Okta application page and find the client ID and cli
 
 Update the `appsettings.json` file with these values:
 
-Open the `Web.config` file and update these values:
-
 * `Okta:ClientId` - The client ID of the Okta application
-* `Okta:ClientSecret` - The Client Secret of the Okta application
+* `Okta:ClientSecret` - The client secret of the Okta application
 * `Okta:Issuer` - Replace `{yourOktaDomain}` with your Okta domain, found at the top-right the Dashboard page, or in the address bar.
 
 **Note:** The value of `{yourOktaDomain}` should be something like `dev-123456.oktapreview.com`. Make sure you don't include `-admin` in the value!
