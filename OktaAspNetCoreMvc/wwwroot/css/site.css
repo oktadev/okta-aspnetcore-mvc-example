@@ -33,3 +33,17 @@
         display: none;
     }
 }
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+dt {
+    padding-bottom: 10px;
+    color: darkgrey;
+}
+
+dd {
+    padding-bottom: 10px;
+    overflow-wrap: break-word;
+}

@@ -17,6 +17,7 @@ namespace OktaAspNetCoreMvc.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
         public IActionResult Logout()
         {
             if (HttpContext.User.Identity.IsAuthenticated)

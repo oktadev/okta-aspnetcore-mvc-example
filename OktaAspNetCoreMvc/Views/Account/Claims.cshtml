@@ -1,22 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "My claims";
+    ViewData["Title"] = "View claims";
 }
 <h2>@ViewData["Title"]</h2>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Claim</th>
-            <th>Value</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var claim in User.Claims)
-        {
-            <tr>
-                <td>@claim.Type</td>
-                <td>@claim.Value</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<dl class="dl-horizontal">
+    @foreach (var claim in User.Claims)
+    {
+        <dt title="@claim.Type">
+            @claim.Type
+            <button type="button" 
+                    class="btn btn-link btn-xs" 
+                    aria-label="Copy to clipboard" 
+                    title="Copy to clipboard"
+                    data-clipboard-text="@claim.Value">
+                <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
+            </button>
+        </dt>
+        
+        <dd>@claim.Value</dd>
+    }
+</dl>

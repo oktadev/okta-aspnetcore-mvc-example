@@ -32,7 +32,7 @@ namespace OktaAspNetCoreMvc
                 // Configuration pulled from appsettings.json by default:
                 options.ClientId = Configuration["okta:ClientId"];
                 options.ClientSecret = Configuration["okta:ClientSecret"];
-                options.Authority = Configuration["okta:Authority"];
+                options.Authority = Configuration["okta:Issuer"];
                 options.CallbackPath = "/authorization-code/callback";
                 options.ResponseType = "code";
                 options.SaveTokens = true;
