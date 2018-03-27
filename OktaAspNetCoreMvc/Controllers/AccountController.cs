@@ -49,7 +49,6 @@ namespace OktaAspNetCoreMvc.Controllers
         [Authorize]
         public async System.Threading.Tasks.Task<IActionResult> Me()
         {
-            
            var oktaClient = new OktaClient(
                 new OktaClientConfiguration()
                 {
