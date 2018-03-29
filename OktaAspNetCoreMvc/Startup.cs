@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Okta.Sdk;
+using Okta.Sdk.Configuration;
 
 namespace OktaAspNetCoreMvc
 {
@@ -45,6 +47,15 @@ namespace OktaAspNetCoreMvc
                     NameClaimType = "name"
                 };
             });
+
+            services.AddSingleton<IOktaClient>
+            (
+                new OktaClient(new OktaClientConfiguration()
+                {
+                    OrgUrl = Configuration["okta:OrgUrl"],
+                    Token = Configuration["okta:APIToken"]
+                })
+            );
 
             services.AddMvc();
         }

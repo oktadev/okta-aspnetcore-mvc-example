@@ -7,17 +7,18 @@ using Okta.Sdk;
 using Okta.Sdk.Configuration;
 using System.Dynamic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OktaAspNetCoreMvc.Controllers
 {
     public class AccountController : Controller
     {
-        public AccountController(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        private readonly IOktaClient _oktaClient;
 
-        public IConfiguration Configuration { get; }
+        public AccountController(IOktaClient oktaClient)
+        {
+            this._oktaClient = oktaClient;
+        }
 
         public IActionResult Login()
         {
@@ -47,20 +48,13 @@ namespace OktaAspNetCoreMvc.Controllers
         }
 
         [Authorize]
-        public async System.Threading.Tasks.Task<IActionResult> Me()
+        public async Task<IActionResult> Me()
         {
-           var oktaClient = new OktaClient(
-                new OktaClientConfiguration()
-                {
-                    OrgUrl = Configuration["okta:OrgUrl"],
-                    Token = Configuration["okta:APIToken"]
-                });
-
             var currentUserId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "preferred_username")?.Value.ToString();
             dynamic userInfoWrapper = null;
 
             if (!string.IsNullOrEmpty(currentUserId)) {
-                var userInfo = await oktaClient.Users.GetUserAsync(currentUserId);
+                var userInfo = await _oktaClient.Users.GetUserAsync(currentUserId);
                 userInfoWrapper = new ExpandoObject();
                 userInfoWrapper.Profile = userInfo.Profile;
                 userInfoWrapper.LastLogin = userInfo.LastLogin;
