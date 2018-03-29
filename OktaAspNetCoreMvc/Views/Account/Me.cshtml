@@ -1,0 +1,67 @@
+﻿
+@using System.Reflection;
+@using System.Linq;
+
+@{
+    ViewData["Title"] = "Me";
+}
+
+<h3>Profile</h3>
+
+<dl class="dl-horizontal">
+    @if (Model != null)
+    {
+        <dt title="FullName">
+            FullName
+            <button type="button"
+                    class="btn btn-link btn-xs"
+                    aria-label="Copy to clipboard"
+                    title="Copy to clipboard"
+                    data-clipboard-text="ndjdh">
+                <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
+            </button>
+        </dt>
+        <dd>@Model.Profile.FirstName @Model.Profile.LastName</dd>
+
+        <dt title="Login">
+            Login
+            <button type="button"
+                    class="btn btn-link btn-xs"
+                    aria-label="Copy to clipboard"
+                    title="Copy to clipboard"
+                    data-clipboard-text="ndjdh">
+                <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
+            </button>
+        </dt>
+        <dd>@Model.Profile.Login</dd>
+
+        <dt title="Last Login">
+            Last Login
+            <button type="button"
+                    class="btn btn-link btn-xs"
+                    aria-label="Copy to clipboard"
+                    title="Copy to clipboard"
+                    data-clipboard-text="ndjdh">
+                <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
+            </button>
+        </dt>
+        <dd>@Model.LastLogin</dd>
+
+        <h3>Groups</h3>
+
+        foreach (var group in Model.Groups)
+        {
+            <dt title="Group">
+                Name
+                <button type="button"
+                        class="btn btn-link btn-xs"
+                        aria-label="Copy to clipboard"
+                        title="Copy to clipboard"
+                        data-clipboard-text="ndjdh">
+                    <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
+                </button>
+            </dt>
+            <dd>@group.Profile.Name</dd>
+        }
+    }
+</dl>
