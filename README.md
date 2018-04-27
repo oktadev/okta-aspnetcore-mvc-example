@@ -58,7 +58,7 @@ Update the `appsettings.json` file with these values:
 
 * `Okta:ClientId` - The client ID of the Okta application
 * `Okta:ClientSecret` - The client secret of the Okta application
-* `Okta:Issuer` - Replace `{yourOktaDomain}` with your Okta domain, found at the top-right the Dashboard page, or in the address bar.
+* `Okta:Issuer` - Replace `{yourOktaDomain}` with your Okta domain, found at the top-right the Dashboard page.
 
 **Note:** The value of `{yourOktaDomain}` should be something like `dev-123456.oktapreview.com`. Make sure you don't include `-admin` in the value!
 
