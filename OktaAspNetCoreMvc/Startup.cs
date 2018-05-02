@@ -47,16 +47,18 @@ namespace OktaAspNetCoreMvc
                     NameClaimType = "name"
                 };
             });
-
-            services.AddSingleton<IOktaClient>
-            (
-                new OktaClient(new OktaClientConfiguration()
-                {
-                    OrgUrl = Configuration["okta:OrgUrl"],
-                    Token = Configuration["okta:APIToken"]
-                })
-            );
-
+            
+            if (!string.IsNullOrEmpty(Configuration["okta:OrgUrl"]) && !string.IsNullOrEmpty(Configuration["okta:APIToken"]))
+            {
+                services.AddSingleton<IOktaClient>
+                (
+                    new OktaClient(new OktaClientConfiguration()
+                    {
+                        OrgUrl = Configuration["okta:OrgUrl"],
+                        Token = Configuration["okta:APIToken"]
+                    })
+                );
+            }
             services.AddMvc();
         }
 

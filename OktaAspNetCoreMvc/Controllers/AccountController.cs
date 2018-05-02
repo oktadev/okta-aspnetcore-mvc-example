@@ -15,7 +15,7 @@ namespace OktaAspNetCoreMvc.Controllers
     {
         private readonly IOktaClient _oktaClient;
 
-        public AccountController(IOktaClient oktaClient)
+        public AccountController(IOktaClient oktaClient = null)
         {
             this._oktaClient = oktaClient;
         }
