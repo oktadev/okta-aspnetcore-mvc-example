@@ -1,27 +1,61 @@
-﻿
-@using System.Reflection;
-@using System.Linq;
+﻿@model OktaAspNetCoreMvc.Models.MeViewModel
 
 @{
-    ViewData["Title"] = "Me";
+    ViewData["Title"] = "My proflie";
 }
 
 <h3>Profile</h3>
 
 <dl class="dl-horizontal">
-    @if (Model != null)
+    <dt>SDK configured?</dt>
+    <dd>
+        @if (Model.SdkAvailable)
+        {
+            <span>Yes!</span>
+        }
+        else
+        {
+            <span>No. Edit <code>appsettings.json</code> and uncomment the lines that configure the SDK.</span>
+        }
+    </dd>
+
+    <dt title="Username">
+        Username
+        <button type="button"
+                class="btn btn-link btn-xs"
+                aria-label="Copy to clipboard"
+                title="Copy to clipboard"
+                data-clipboard-target="#userinfo-username">
+            <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
+        </button>
+    </dt>
+    <dd id="userinfo-username">@Model.Username</dd>
+
+    @if (Model.SdkAvailable)
     {
-        <dt title="FullName">
-            FullName
+        <dt title="Status">
+            Status
             <button type="button"
                     class="btn btn-link btn-xs"
                     aria-label="Copy to clipboard"
                     title="Copy to clipboard"
-                    data-clipboard-text="ndjdh">
+                    data-clipboard-target="#userinfo-status">
                 <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
             </button>
         </dt>
-        <dd>@Model.Profile.FirstName @Model.Profile.LastName</dd>
+        <dd id="userinfo-status">@Model.UserInfo.Status</dd>
+
+        <dt title="Full name">
+            Full name
+            <button type="button"
+                    class="btn btn-link btn-xs"
+                    aria-label="Copy to clipboard"
+                    title="Copy to clipboard"
+                    data-clipboard-target="#userinfo-fullname">
+                <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
+            </button>
+        </dt>
+        <dd id="userinfo-fullname">@Model.UserInfo.Profile.FirstName @Model.UserInfo.Profile.LastName</dd>
 
         <dt title="Login">
             Login
@@ -29,39 +63,47 @@
                     class="btn btn-link btn-xs"
                     aria-label="Copy to clipboard"
                     title="Copy to clipboard"
-                    data-clipboard-text="ndjdh">
+                    data-clipboard-target="#userinfo-login">
                 <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
             </button>
         </dt>
-        <dd>@Model.Profile.Login</dd>
+        <dd id="userinfo-login">@Model.UserInfo.Profile.Login</dd>
 
-        <dt title="Last Login">
-            Last Login
+        <dt title="Last login">
+            Last login
             <button type="button"
                     class="btn btn-link btn-xs"
                     aria-label="Copy to clipboard"
                     title="Copy to clipboard"
-                    data-clipboard-text="ndjdh">
+                    data-clipboard-target="#userinfo-lastlogin">
                 <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
             </button>
         </dt>
-        <dd>@Model.LastLogin</dd>
+        <dd id="userinfo-lastlogin">@Model.UserInfo.LastLogin</dd>
 
-        <h3>Groups</h3>
+        <dt title="Password updated">
+            Password updated 
+            <button type="button"
+                    class="btn btn-link btn-xs"
+                    aria-label="Copy to clipboard"
+                    title="Copy to clipboard"
+                    data-clipboard-target="#userinfo-passwordupdated">
+                <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
+            </button>
+        </dt>
+        <dd id="userinfo-passwordupdated">@Model.UserInfo.PasswordChanged</dd>
 
-        foreach (var group in Model.Groups)
-        {
-            <dt title="Group">
-                Name
-                <button type="button"
-                        class="btn btn-link btn-xs"
-                        aria-label="Copy to clipboard"
-                        title="Copy to clipboard"
-                        data-clipboard-text="ndjdh">
-                    <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
-                </button>
-            </dt>
-            <dd>@group.Profile.Name</dd>
-        }
+        <dt title="Groups">
+            Groups
+            <button type="button"
+                    class="btn btn-link btn-xs"
+                    aria-label="Copy to clipboard"
+                    title="Copy to clipboard"
+                    data-clipboard-target="#userinfo-groups">
+                <span class="glyphicon glyphicon glyphicon-copy" aria-hidden="true"></span>
+            </button>
+        </dt>
+        <dd id="userinfo-groups">@string.Join(", ", Model.Groups)</dd>
     }
+
 </dl>

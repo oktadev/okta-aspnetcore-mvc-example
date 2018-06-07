@@ -60,6 +60,11 @@ Update the `appsettings.json` file with these values:
 * `Okta:ClientSecret` - The client secret of the Okta application
 * `Okta:Issuer` - Replace `{yourOktaDomain}` with your Okta domain, found at the top-right the Dashboard page.
 
+Optionally, if you want to use the Okta SDK (and test `Account/Me`) make sure to update these values as well:
+
+* `Okta:APIToken` - Your API token obtained from Developer Dashboard
+* `Okta:OrgUrl` - Your Okta domain, i.e https://dev-123456.oktapreview.com  
+
 **Note:** The value of `{yourOktaDomain}` should be something like `dev-123456.oktapreview.com`. Make sure you don't include `-admin` in the value!
 
 ### Start the application

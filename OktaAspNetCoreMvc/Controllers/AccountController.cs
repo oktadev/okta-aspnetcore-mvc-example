@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using System.Dynamic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Okta.Sdk;
-using Okta.Sdk.Configuration;
-using System.Dynamic;
-using System.Linq;
-using System.Threading.Tasks;
+using OktaAspNetCoreMvc.Models;
 
 namespace OktaAspNetCoreMvc.Controllers
 {
@@ -15,9 +14,9 @@ namespace OktaAspNetCoreMvc.Controllers
     {
         private readonly IOktaClient _oktaClient;
 
-        public AccountController(IOktaClient oktaClient)
+        public AccountController(IOktaClient oktaClient = null)
         {
-            this._oktaClient = oktaClient;
+            _oktaClient = oktaClient;
         }
 
         public IActionResult Login()
@@ -50,18 +49,35 @@ namespace OktaAspNetCoreMvc.Controllers
         [Authorize]
         public async Task<IActionResult> Me()
         {
-            var currentUserId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "preferred_username")?.Value.ToString();
-            dynamic userInfoWrapper = null;
+            var username = User.Claims
+                .FirstOrDefault(x => x.Type == "preferred_username")
+                ?.Value.ToString();
 
-            if (!string.IsNullOrEmpty(currentUserId)) {
-                var userInfo = await _oktaClient.Users.GetUserAsync(currentUserId);
-                userInfoWrapper = new ExpandoObject();
-                userInfoWrapper.Profile = userInfo.Profile;
-                userInfoWrapper.LastLogin = userInfo.LastLogin;
-                userInfoWrapper.Groups = await userInfo.Groups.ToList();
+            var viewModel = new MeViewModel
+            {
+                Username = username,
+                SdkAvailable = _oktaClient != null
+            };
+
+            if (!viewModel.SdkAvailable)
+            {
+                return View(viewModel);
+            }
+
+            if (!string.IsNullOrEmpty(username))
+            {
+                var user = await _oktaClient.Users.GetUserAsync(username);
+                dynamic userInfoWrapper = new ExpandoObject();
+                userInfoWrapper.Profile = user.Profile;
+                userInfoWrapper.PasswordChanged = user.PasswordChanged;
+                userInfoWrapper.LastLogin = user.LastLogin;
+                userInfoWrapper.Status = user.Status.ToString();
+                viewModel.UserInfo = userInfoWrapper;
+
+                viewModel.Groups = (await user.Groups.ToList()).Select(g => g.Profile.Name).ToArray();
             }
             
-            return View(userInfoWrapper);
+            return View(viewModel);
         }
     }
 }
