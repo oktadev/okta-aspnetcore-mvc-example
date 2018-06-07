@@ -28,7 +28,7 @@ Or download a zip archive of the repository from GitHub and extract it on your m
 
 You will need to create an application in Okta to to perform authentication. 
 
-Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Web**, click **Next**, and give the app a name you’ll remember.
+Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don't have an account) and navigate to **Applications** > **Add Application**. Click **Web**, click **Next**, and give the app a name you'll remember.
 
 Change the **Base URI** to:
 
@@ -58,12 +58,12 @@ Update the `appsettings.json` file with these values:
 
 * `Okta:ClientId` - The client ID of the Okta application
 * `Okta:ClientSecret` - The client secret of the Okta application
-* `Okta:Issuer` - Replace `{yourOktaDomain}` with your Okta domain, found at the top-right the Dashboard page.
+* `Okta:Issuer` - Replace `{yourOktaDomain}` with your Okta domain, found at the top-right of the the Dashboard page
 
 Optionally, if you want to use the Okta SDK (and test `Account/Me`) make sure to update these values as well:
 
-* `Okta:APIToken` - Your API token obtained from Developer Dashboard
-* `Okta:OrgUrl` - Your Okta domain, i.e https://dev-123456.oktapreview.com  
+* `Okta:APIToken` - Your API token obtained from the API section of the Developer Console
+* `Okta:OrgUrl` - Replace `{yourOktaDomain}` with your Okta domain, found at the top-right of the Dashboard page
 
 **Note:** The value of `{yourOktaDomain}` should be something like `dev-123456.oktapreview.com`. Make sure you don't include `-admin` in the value!
 
